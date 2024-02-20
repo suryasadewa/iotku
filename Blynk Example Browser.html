@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!-- saved from url=(0154)https://examples.blynk.cc/?board=ESP8266&shield=ESP8266%20WiFi&example=More%2FDHT11&auth=C7Q9ha-ZJdlqvaqkyPJd561e7eYpcTa3&dev=dht11ds18&tmpl=TMPL6VmFaWFs0 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#23c890">
+  <link rel="icon" sizes="144x144" type="image/png" href="https://examples.blynk.cc/favicon.png">
+
+  <meta property="og:image" content="http://blynk-examples.herokuapp.com/preview.png">
+  <meta property="og:image:secure_url" content="https://blynk-examples.herokuapp.com/preview.png">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="269">
+
+  <title>Blynk Example Browser</title>
+
+  <link rel="stylesheet" href="./Blynk Example Browser_files/default.min.css">
+  <link href="./Blynk Example Browser_files/css" rel="stylesheet">
+
+  <script src="./Blynk Example Browser_files/jquery.min.js.download"></script>
+  <script src="./Blynk Example Browser_files/clipboard.min.js.download"></script>
+  <script async="" defer="" src="./Blynk Example Browser_files/buttons.js.download"></script>
+
+  <script src="./Blynk Example Browser_files/highlight.min.js.download"></script>
+  <script src="./Blynk Example Browser_files/blynk-arduino.js.download"></script>
+
+  <style>
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+  html, body, select, button, input {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    font-size: 16px;
+    color: #000;
+    background-color: #FFF;
+  }
+
+  select, button, input {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .left {
+    width: 20%;
+    top:0;
+    bottom:0;
+    left:0;
+    position: fixed;
+    padding: 30px;
+    color: #FFF;
+    background-color: #23C890;
+  }
+
+  .right {
+    top:0;
+    bottom:0;
+    right:0;
+    position: fixed;
+    padding: 30px;
+  }
+
+  .bottom-right {
+    font-size: 12px;
+
+    width: 164px;
+    bottom:0;
+    right:0;
+    position: fixed;
+    padding: 30px;
+  }
+
+  .note, .note > * {
+    font-size: 12px;
+  }
+
+  .hljs {
+    font-family: "Ubuntu Mono", "Lucida Console", Monaco, monospace;
+    font-size: 14px;
+    box-shadow: 5px 5px 20px #BBB;
+    background-color: #FAFAFA;
+
+    width: 60%;
+    left:  25%;
+    top:   0;
+    height: auto;
+    margin: 30px;
+    padding: 20px;
+    position: absolute;
+  }
+
+  .hljs a:link, .hljs a:visited, .hljs a:active {
+    color: #23C890;
+  }
+
+  .hljs a:hover {
+    color: blue;
+  }
+
+  .left a:link, .left a:visited, .left a:active {
+    color: #fff;
+  }
+
+  .left a:hover {
+    color: #fff;
+  }
+
+  </style>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1153.0" data-gr-ext-installed="">
+  <div class="left">
+    <img alt="Blynk" src="./Blynk Example Browser_files/logo.png" height="64">
+    <div>
+      <label>Board:</label><br>
+      <select name="board" id="board-list" fdprocessedid="f8hqra"><option disabled="" value=" Espressif" style="font-weight: bold;">── Espressif</option><option value="ESP8266">&nbsp;&nbsp;&nbsp;ESP8266</option><option value="ESP32">&nbsp;&nbsp;&nbsp;ESP32</option><option value="NodeMCU">&nbsp;&nbsp;&nbsp;NodeMCU</option><option value="WeMos D1">&nbsp;&nbsp;&nbsp;WeMos D1</option><option value="Adafruit Huzzah">&nbsp;&nbsp;&nbsp;Adafruit Huzzah</option><option value="SparkFun Blynk Board">&nbsp;&nbsp;&nbsp;SparkFun Blynk Board</option><option value="SparkFun ESP8266 Thing">&nbsp;&nbsp;&nbsp;SparkFun ESP8266 Thing</option><option disabled="" value=" Seeed Studio" style="font-weight: bold;">── Seeed Studio</option><option value="Wio Terminal">&nbsp;&nbsp;&nbsp;Wio Terminal</option><option disabled="" value=" Linux (C++)" style="font-weight: bold;">── Linux (C++)</option><option value="Raspberry Pi">&nbsp;&nbsp;&nbsp;Raspberry Pi</option><option value="Ubuntu">&nbsp;&nbsp;&nbsp;Ubuntu</option><option disabled="" value=" Arduino" style="font-weight: bold;">── Arduino</option><option value="Arduino Uno">&nbsp;&nbsp;&nbsp;Arduino Uno</option><option value="Arduino MKR1000">&nbsp;&nbsp;&nbsp;Arduino MKR1000</option><option value="Arduino MKR1010">&nbsp;&nbsp;&nbsp;Arduino MKR1010</option><option value="Arduino MKR1400">&nbsp;&nbsp;&nbsp;Arduino MKR1400</option><option value="Arduino MKRZero">&nbsp;&nbsp;&nbsp;Arduino MKRZero</option><option value="Arduino Yun">&nbsp;&nbsp;&nbsp;Arduino Yun</option><option value="Arduino Zero">&nbsp;&nbsp;&nbsp;Arduino Zero</option><option value="Arduino M0">&nbsp;&nbsp;&nbsp;Arduino M0</option><option value="Arduino M0 Pro">&nbsp;&nbsp;&nbsp;Arduino M0 Pro</option><option value="Arduino Nano">&nbsp;&nbsp;&nbsp;Arduino Nano</option><option value="Arduino Leonardo">&nbsp;&nbsp;&nbsp;Arduino Leonardo</option><option value="Arduino Due">&nbsp;&nbsp;&nbsp;Arduino Due</option><option value="Arduino Mega 2560">&nbsp;&nbsp;&nbsp;Arduino Mega 2560</option><option value="Arduino Mega 1280">&nbsp;&nbsp;&nbsp;Arduino Mega 1280</option><option value="Arduino Mega ADK">&nbsp;&nbsp;&nbsp;Arduino Mega ADK</option><option value="Arduino Micro">&nbsp;&nbsp;&nbsp;Arduino Micro</option><option value="Arduino Pro Micro">&nbsp;&nbsp;&nbsp;Arduino Pro Micro</option><option value="Arduino Mini">&nbsp;&nbsp;&nbsp;Arduino Mini</option><option value="Arduino Pro Mini">&nbsp;&nbsp;&nbsp;Arduino Pro Mini</option><option value="Arduino Fio">&nbsp;&nbsp;&nbsp;Arduino Fio</option><option value="Arduino Diecimila">&nbsp;&nbsp;&nbsp;Arduino Diecimila</option><option value="Arduino Duemilanove">&nbsp;&nbsp;&nbsp;Arduino Duemilanove</option><option value="Arduino Pro">&nbsp;&nbsp;&nbsp;Arduino Pro</option><option value="Arduino Ethernet">&nbsp;&nbsp;&nbsp;Arduino Ethernet</option><option value="Arduino Leonardo ETH">&nbsp;&nbsp;&nbsp;Arduino Leonardo ETH</option><option value="Arduino Industrial 101">&nbsp;&nbsp;&nbsp;Arduino Industrial 101</option><option disabled="" value=" Particle" style="font-weight: bold;">── Particle</option><option value="Particle Core">&nbsp;&nbsp;&nbsp;Particle Core</option><option value="Particle Photon">&nbsp;&nbsp;&nbsp;Particle Photon</option><option value="Particle Electron">&nbsp;&nbsp;&nbsp;Particle Electron</option><option value="Particle Argon">&nbsp;&nbsp;&nbsp;Particle Argon</option><option value="Particle Boron">&nbsp;&nbsp;&nbsp;Particle Boron</option></select>
+    </div>
+    <div>
+      <label>Connection:</label><br>
+      <select name="shield" id="shield-list" fdprocessedid="sc3wpa"><option disabled="" value=" Built In" style="font-weight: bold;">── Built In</option><option value="ESP8266 WiFi">&nbsp;&nbsp;&nbsp;ESP8266 WiFi</option><option value="ESP8266 WiFi (SSL)">&nbsp;&nbsp;&nbsp;ESP8266 WiFi (SSL)</option><option disabled="" value=" Ethernet" style="font-weight: bold;">── Ethernet</option><option disabled="" value=" WiFi" style="font-weight: bold;">── WiFi</option><option disabled="" value=" Cellular" style="font-weight: bold;">── Cellular</option><option disabled="" value=" Serial" style="font-weight: bold;">── Serial</option></select>
+    </div>
+    <div class="note" style="padding: 10px 0 20px 0">
+      Full list of supported hardware is <b><a href="https://github.com/blynkkk/blynkkk.github.io/blob/master/SupportedHardware.md">here</a></b>
+    </div>
+    <div>
+      <label>Template ID:</label><br>
+      <input name="tmpl" id="template-id" type="text" fdprocessedid="9uaalq">
+    </div>
+    <div>
+      <label>Template Name:</label><br>
+      <input name="devname" id="device-name" type="text" fdprocessedid="fsdpph">
+    </div>
+    <div>
+      <label>Auth Token:</label><br>
+      <input name="auth" id="auth-token" type="text" fdprocessedid="cnnqmj">
+    </div>
+    <br>
+    <div>
+      <label>Example:</label><br>
+      <select name="example" id="example-list" fdprocessedid="96d32g"><option disabled="" value="Getting Started" style="font-weight: bold;">──Getting Started</option><option value="GettingStarted/BlynkBlink">&nbsp;&nbsp;&nbsp;Blynk Blink</option><option value="GettingStarted/BlynkSimpleDemo">&nbsp;&nbsp;&nbsp;Blynk Simple Demo</option><option value="GettingStarted/GetData">&nbsp;&nbsp;&nbsp;Get Data</option><option value="GettingStarted/PushData">&nbsp;&nbsp;&nbsp;Push Data</option><option value="GettingStarted/Servo">&nbsp;&nbsp;&nbsp;Servo</option><option value="GettingStarted/VirtualPinRead">&nbsp;&nbsp;&nbsp;Virtual Pin Read</option><option value="GettingStarted/VirtualPinWrite">&nbsp;&nbsp;&nbsp;Virtual Pin Write</option><option disabled="" value="Widgets" style="font-weight: bold;">──Widgets</option><option value="Widgets/Joystick">&nbsp;&nbsp;&nbsp;Joystick</option><option value="Widgets/LCD/LCD_SimpleMode">&nbsp;&nbsp;&nbsp;LCD Simple Mode</option><option value="Widgets/LCD/LCD_AdvancedMode">&nbsp;&nbsp;&nbsp;LCD Advanced Mode</option><option value="Widgets/LED/LED_Blink">&nbsp;&nbsp;&nbsp;LED Blink</option><option value="Widgets/LED/LED_Color">&nbsp;&nbsp;&nbsp;LED Color</option><option value="Widgets/LED/LED_Fade">&nbsp;&nbsp;&nbsp;LED Fade</option><option value="Widgets/LED/LED_StatusOfButton">&nbsp;&nbsp;&nbsp;LED Status Of Button</option><option value="Widgets/Map">&nbsp;&nbsp;&nbsp;Map</option><option value="Widgets/Menu">&nbsp;&nbsp;&nbsp;Menu</option><option value="Widgets/MusicPlayer">&nbsp;&nbsp;&nbsp;Music Player</option><option value="Widgets/RTC">&nbsp;&nbsp;&nbsp;RTC</option><option value="Widgets/RTC_Advanced">&nbsp;&nbsp;&nbsp;RTC Advanced</option><option value="Widgets/Terminal">&nbsp;&nbsp;&nbsp;Terminal</option><option value="Widgets/TimeInput/SimpleTimeInput">&nbsp;&nbsp;&nbsp;Simple Time Input</option><option value="Widgets/TimeInput/AdvancedTimeInput">&nbsp;&nbsp;&nbsp;Advanced Time Input</option><option disabled="" value="More" style="font-weight: bold;">──More</option><option value="More/DHT11">&nbsp;&nbsp;&nbsp;DHT11</option><option value="More/FormatString">&nbsp;&nbsp;&nbsp;Format String</option><option value="More/NeoPixel">&nbsp;&nbsp;&nbsp;Neo Pixel</option><option value="More/PrintAllVirtual">&nbsp;&nbsp;&nbsp;Print All Virtual</option><option value="More/ServerAsDataStorage/ServerAsDataStorage_SingleValue">&nbsp;&nbsp;&nbsp;Server As Data Storage Single Value</option><option value="More/ServerAsDataStorage/ServerAsDataStorage_MultiValue">&nbsp;&nbsp;&nbsp;Server As Data Storage Multi Value</option><option value="More/SetProperty/SetProperty_SingleValue">&nbsp;&nbsp;&nbsp;Set Property Single Value</option><option value="More/SetProperty/SetProperty_MultiValue">&nbsp;&nbsp;&nbsp;Set Property Multi Value</option><option value="More/Stroboscope">&nbsp;&nbsp;&nbsp;Stroboscope</option><option value="More/Sync/ButtonPoll">&nbsp;&nbsp;&nbsp;Button Poll</option><option value="More/Sync/ButtonInterrupt">&nbsp;&nbsp;&nbsp;Button Interrupt</option><option value="More/Sync/HardwareSyncStateFromApp">&nbsp;&nbsp;&nbsp;Hardware Sync State From App</option><option value="More/Sync/SyncPhysicalButton">&nbsp;&nbsp;&nbsp;Sync Physical Button</option><option value="More/TimeAndLocation">&nbsp;&nbsp;&nbsp;Time And Location</option></select>
+    </div>
+  </div>
+  <div class="right">
+    <div class="note">Please give us <br> a Github star!<br></div>
+    <span><template shadowrootmode="closed"><style type="text/css">body{margin:0}a{text-decoration:none;outline:0}.widget{display:inline-block;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;font-size:0;line-height:0;white-space:nowrap}.btn,.social-count{position:relative;display:inline-block;display:inline-flex;height:14px;padding:2px 5px;font-size:11px;font-weight:600;line-height:14px;vertical-align:bottom;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-repeat:repeat-x;background-position:-1px -1px;background-size:110% 110%;border:1px solid}.btn{border-radius:.25em}.btn:not(:last-child){border-radius:.25em 0 0 .25em}.social-count{border-left:0;border-radius:0 .25em .25em 0}.widget-lg .btn,.widget-lg .social-count{height:16px;padding:5px 10px;font-size:12px;line-height:16px}.octicon{display:inline-block;vertical-align:text-top;fill:currentColor;overflow:visible}.btn:focus-visible,.social-count:focus-visible{outline:2px solid #0969da;outline-offset:-2px}.btn{color:#24292f;background-color:#ebf0f4;border-color:#ccd1d5;border-color:rgba(31,35,40,.15);background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3clinearGradient id='o' x2='0' y2='1'%3e%3cstop stop-color='%23f6f8fa'/%3e%3cstop offset='90%25' stop-color='%23ebf0f4'/%3e%3c/linearGradient%3e%3crect width='100%25' height='100%25' fill='url(%23o)'/%3e%3c/svg%3e");background-image:-moz-linear-gradient(top, #f6f8fa, #ebf0f4 90%);background-image:linear-gradient(180deg, #f6f8fa, #ebf0f4 90%);filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFF6F8FA', endColorstr='#FFEAEFF3')}:root .btn{filter:none}.btn:hover,.btn:focus{background-color:#e9ebef;background-position:0 -0.5em;border-color:#cbcdd1;border-color:rgba(31,35,40,.15);background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3clinearGradient id='o' x2='0' y2='1'%3e%3cstop stop-color='%23f3f4f6'/%3e%3cstop offset='90%25' stop-color='%23e9ebef'/%3e%3c/linearGradient%3e%3crect width='100%25' height='100%25' fill='url(%23o)'/%3e%3c/svg%3e");background-image:-moz-linear-gradient(top, #f3f4f6, #e9ebef 90%);background-image:linear-gradient(180deg, #f3f4f6, #e9ebef 90%);filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr='#FFF3F4F6', endColorstr='#FFE8EAEE')}:root .btn:hover,:root .btn:focus{filter:none}.btn:active{background-color:#e5e9ed;border-color:#c7cbcf;border-color:rgba(31,35,40,.15);background-image:none;filter:none}.social-count{color:#24292f;background-color:#fff;border-color:#dddedf;border-color:rgba(31,35,40,.15)}.social-count:hover,.social-count:focus{color:#0969da}.octicon-heart{color:#bf3989}</style><div class="widget"><a class="btn" href="https://github.com/blynkkk/blynk-library" rel="noopener" target="_blank" aria-label="Star blynkkk/blynk-library on GitHub"><svg viewBox="0 0 16 16" width="14" height="14" class="octicon octicon-star" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"></path></svg>&nbsp;<span>Star</span></a></div></template></span>
+    <br>
+    <br>
+    <button class="btn" data-clipboard-target=".sketch" fdprocessedid="h75rpf">📋 copy<br>example</button>
+  </div>
+  <div class="bottom-right note">
+    <b>WARNING!</b><br>
+    Some sketches may contain errors. Please check your code carefully and
+    <button id="reportproblem" fdprocessedid="700s6v">⚠ report a problem</button>
+  </div>
+  <pre><code class="hljs sketch"><span class="hljs-comment">/*************************************************************
+
+  This example shows how value can be pushed from Arduino to
+  the Blynk App.
+
+  WARNING :
+  For this example you'll need Adafruit DHT sensor libraries:
+    <a href="https://github.com/adafruit/Adafruit_Sensor" target="_blank">https://github.com/adafruit/Adafruit_Sensor</a>
+    <a href="https://github.com/adafruit/DHT-sensor-library" target="_blank">https://github.com/adafruit/DHT-sensor-library</a>
+
+  App dashboard setup:
+    Value Display widget attached to V5
+    Value Display widget attached to V6
+ *************************************************************/</span>
+
+<span class="hljs-comment">/* Fill-in information from Blynk Device Info here */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BLYNK_TEMPLATE_ID           <span class="hljs-meta-string">"TMPL6VmFaWFs0"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BLYNK_TEMPLATE_NAME         <span class="hljs-meta-string">"dht11ds18"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BLYNK_AUTH_TOKEN            <span class="hljs-meta-string">"C7Q9ha-ZJdlqvaqkyPJd561e7eYpcTa3"</span></span>
+
+<span class="hljs-comment">/* Comment this out to disable prints and save space */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BLYNK_PRINT Serial</span>
+
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ESP8266WiFi.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;BlynkSimpleEsp8266.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;DHT.h&gt;</span></span>
+
+<span class="hljs-comment">// Your WiFi credentials.</span>
+<span class="hljs-comment">// Set password to "" for open networks.</span>
+<span class="hljs-keyword">char</span> ssid[] = <span class="hljs-string">"YourNetworkName"</span>;
+<span class="hljs-keyword">char</span> pass[] = <span class="hljs-string">"YourPassword"</span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DHTPIN 2          <span class="hljs-comment">// What digital pin we're connected to</span></span>
+
+<span class="hljs-comment">// Uncomment whatever type you're using!</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DHTTYPE DHT11     <span class="hljs-comment">// DHT 11</span></span>
+<span class="hljs-comment">//#define DHTTYPE DHT22   // DHT 22, AM2302, AM2321</span>
+<span class="hljs-comment">//#define DHTTYPE DHT21   // DHT 21, AM2301</span>
+
+<span class="hljs-built_in">DHT</span> dht(DHTPIN, DHTTYPE);
+<span class="hljs-built_in">BlynkTimer</span> timer;
+
+<span class="hljs-comment">// This function sends Arduino's up time every second to Virtual Pin (5).</span>
+<span class="hljs-comment">// In the app, Widget's reading frequency should be set to PUSH. This means</span>
+<span class="hljs-comment">// that you define how often to send data to Blynk App.</span>
+<span class="hljs-keyword">void</span> sendSensor()
+{
+  <span class="hljs-keyword">float</span> h = dht.<span class="hljs-built_in">readHumidity</span>();
+  <span class="hljs-keyword">float</span> t = dht.<span class="hljs-built_in">readTemperature</span>(); <span class="hljs-comment">// or dht.readTemperature(true) for Fahrenheit</span>
+
+  <span class="hljs-built_in">if</span> (isnan(h) || isnan(t)) {
+    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(<span class="hljs-string">"Failed to read from DHT sensor!"</span>);
+    <span class="hljs-built_in">return</span>;
+  }
+  <span class="hljs-comment">// You can send any value at any time.</span>
+  <span class="hljs-comment">// Please don't send more that 10 values per second.</span>
+  <span class="hljs-built_in">Blynk</span>.<span class="hljs-built_in">virtualWrite</span>(<span class="hljs-literal">V5</span>, h);
+  <span class="hljs-built_in">Blynk</span>.<span class="hljs-built_in">virtualWrite</span>(<span class="hljs-literal">V6</span>, t);
+}
+
+<span class="hljs-keyword">void</span> <span class="hljs-built_in">setup</span>()
+{
+  <span class="hljs-comment">// Debug console</span>
+  <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">begin</span>(<span class="hljs-number">115200</span>);
+
+  <span class="hljs-built_in">Blynk</span>.<span class="hljs-built_in">begin</span>(BLYNK_AUTH_TOKEN, ssid, pass);
+  <span class="hljs-comment">// You can also specify server:</span>
+  <span class="hljs-comment">//Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass, "blynk.cloud", 80);</span>
+  <span class="hljs-comment">//Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass, IPAddress(192,168,1,100), 8080);</span>
+
+  dht.<span class="hljs-built_in">begin</span>();
+
+  <span class="hljs-comment">// Setup a function to be called every second</span>
+  timer.setInterval(<span class="hljs-number">1000</span>L, sendSensor);
+}
+
+<span class="hljs-keyword">void</span> <span class="hljs-built_in">loop</span>()
+{
+  <span class="hljs-built_in">Blynk</span>.<span class="hljs-built_in">run</span>();
+  timer.<span class="hljs-built_in">run</span>();
+}
+
+</code></pre>
+
+  <script type="text/javascript">
+
+$(function() {
+
+  var prev_shield;
+
+  function fillOptions(options, data) {
+
+    function groupTemplate(v, html) {
+      return $("<option disabled />").val(v).html("──" + html).css("font-weight", "bold");
+    }
+
+    function itemTemplate(v, html) {
+      return $("<option />").val(v).html("&nbsp;&nbsp;&nbsp;" + html);
+    }
+
+    options.empty();
+
+    var currentCroup;
+    $.each( data, function(i, v) {
+
+      if (v.indexOf('/') !== -1) {
+
+        var parsed = v.split('/').map(function (i) {
+          return i.replace('_', ' ').replace(/(([a-z])([A-Z]))/g, '$2 $3').trim()
+        });
+
+        var groupName = parsed[0];
+        var itemName = parsed[parsed.length - 1];
+
+        if(currentCroup !== groupName) {
+          currentCroup = groupName;
+          options.append(groupTemplate(groupName, groupName));
+        }
+
+        options.append(itemTemplate(v, itemName));
+
+      } else {
+        if (v.startsWith("---")) {
+          v = v.replace(/-/g, '');
+          options.append(groupTemplate(v, v));
+        } else {
+          options.append(itemTemplate(v, v));
+        }
+      }
+    });
+  }
+
+  function updateBoards() {
+    $.getJSON( "/listBoards", function(data) {
+      fillOptions($("#board-list"), data);
+      updateConn();
+    });
+  }
+
+  function updateConn() {
+    var board = $( "#board-list option:selected" ).val();
+    $.getJSON( "/getBoardShields?b=" + board, function(data) {
+      fillOptions($("#shield-list"), data);
+      if (prev_shield !== undefined && data.indexOf(prev_shield) >= 0) {
+        $('#shield-list').val(prev_shield);
+      }
+      reGenerate();
+    });
+  }
+
+  function reGenerate(noPushState) {
+    var board = $("#board-list option:selected").val();
+    var shield = $("#shield-list option:selected").val();
+    var example = $("#example-list option:selected").val();
+    var auth = $("#auth-token").val();
+    var dev_name = $("#device-name").val();
+    var tmpl_id = $("#template-id").val();
+
+    if (!noPushState) {
+      window.history.pushState([board, shield, example, auth], board,
+            "?board=" + encodeURIComponent(board) +
+            "&shield=" + encodeURIComponent(shield) +
+            "&example=" + encodeURIComponent(example) +
+            (auth !== "" ? "&auth=" + encodeURIComponent(auth) : "") +
+            (dev_name !== "" ? "&dev=" + encodeURIComponent(dev_name) : "") +
+            (tmpl_id !== "" ? "&tmpl=" + encodeURIComponent(tmpl_id) : "")
+      );
+    }
+
+    $.ajax({
+      url : "/generate?b=" + board + "&s=" + shield + "&e=" + example +
+                    (auth ? "&a=" + encodeURIComponent(auth) : "") +
+                    (dev_name ? "&n=" + encodeURIComponent(dev_name) : "") +
+                    (tmpl_id ? "&t=" + encodeURIComponent(tmpl_id) : ""),
+      dataType: "text",
+      success : function (data) {
+        data = hljs.highlight("blynk-arduino", data).value;
+        $(".sketch").html(data);
+        $('pre code').each(function(){
+            // Get the content
+            var str = $(this).html();
+            // Set the regex string
+            var regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/\.#_-]*(\?\S+)?)?)?)/ig
+            // Replace plain text links by hyperlinks
+            var replaced_text = str.replace(regex, "<a href='$1' target='_blank'>$1</a>");
+            // Echo link
+            $(this).html(replaced_text);
+        });
+      }
+    });
+  }
+
+    function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1));
+        var sURLVariables = sPageURL.split('&');
+        var sParameterName;
+
+        for (var i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? false : sParameterName[1];
+            }
+        }
+        return false;
+    }
+
+  var clipboard = new Clipboard('.btn');
+
+  clipboard.on('success', function(e) {
+    e.clearSelection();
+  });
+
+  clipboard.on('error', function(e) {
+    alert('Cannot copy');
+  });
+
+  $("#board-list").change(function() {
+    updateConn();
+  });
+
+  $("#shield-list").change(function() {
+    prev_shield = $("#shield-list option:selected" ).val();
+    reGenerate();
+  });
+
+  $("#example-list").change(function() {
+    reGenerate();
+  });
+
+  var authChangeTmr = -1;
+  var onAuthChange = function() {
+    if (authChangeTmr >= 0) {
+      clearTimeout(authChangeTmr);
+    }
+    authChangeTmr = setTimeout(function() {
+      reGenerate();
+      authChangeTmr = -1;
+    }, 1000);
+  };
+
+  $("#auth-token").change(onAuthChange);
+  $("#auth-token").keyup(onAuthChange);
+  
+  $("#template-id").change(onAuthChange);
+  $("#template-id").keyup(onAuthChange);
+  
+  $("#device-name").change(onAuthChange);
+  $("#device-name").keyup(onAuthChange);
+
+  $("#reportproblem").click(function() {
+    var url = "https://github.com/blynkkk/blynk-sketch-generator/issues";
+    window.open(url, "_blank");
+  });
+
+      function init(board, shield, example, auth, noPushState) {
+          var tmp;
+          var boardParam = ((tmp = getUrlParameter("board")) ? tmp : board);
+          var shieldParam = ((tmp = getUrlParameter("shield")) ? tmp : shield);
+          var exampleParam = ((tmp = getUrlParameter("example")) ? tmp : example);
+          var authParam = ((tmp = getUrlParameter("auth")) ? tmp : auth);
+          var tmplParam = ((tmp = getUrlParameter("tmpl")) ? tmp : "");
+          var devnameParam = ((tmp = getUrlParameter("dev")) ? tmp : "");
+
+          $.getJSON( "/listBoards", function(data) {
+              fillOptions($("#board-list"), data);
+              $.getJSON( "/getBoardShields?b=" + boardParam, function(data) {
+                  fillOptions($("#shield-list"), data);
+                  $.getJSON( "/listExamples", function(data) {
+                      fillOptions($("#example-list"), data);
+
+                      $("#board-list").val(boardParam);
+                      $("#shield-list").val(shieldParam);
+                      $("#example-list").val(exampleParam);
+                      $("#auth-token").val(authParam);
+                      $("#template-id").val(tmplParam);
+                      $("#device-name").val(devnameParam);
+
+                      reGenerate(noPushState);
+                  });
+              });
+          });
+      }
+
+  window.addEventListener('popstate', function(event) {
+    //if (event.state)
+    init("ESP8266", "ESP8266 WiFi", "GettingStarted/BlynkBlink", "", true);
+  }, false);
+
+  init("ESP8266", "ESP8266 WiFi", "GettingStarted/BlynkBlink", "");
+
+});
+
+  </script>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
